@@ -33,6 +33,11 @@ From LF Require Export Basics.
      - In Proof General or CoqIDE, the compilation should happen
        automatically when you submit the [Require] line above to PG.
 
+     - For VSCode users, open the terminal pane at the bottom 
+       and then use the command line instructions below. 
+       (If you downloaded the project setup .tgz file, just doing `make`
+       should build all the code.)
+
      - If you want to compile from the command line, generate a
        [Makefile] using the [coq_makefile] utility, which comes
        installed with Coq (if you obtained the whole volume as a
@@ -199,32 +204,22 @@ Proof.
 Theorem mul_0_r : forall n:nat,
   n * 0 = 0.
 Proof.
-  intro n. induction n as [| n' IHn''].
-  - reflexivity.
-  - simpl. rewrite -> IHn''. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 
 Theorem plus_n_Sm : forall n m : nat,
   S (n + m) = n + (S m).
 Proof.
-  intros n m. simpl. induction n as [| n' IHn'].
-  - simpl. reflexivity.  
-  - simpl. rewrite -> IHn'. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 
 Theorem add_comm : forall n m : nat,
   n + m = m + n.
 Proof.
-  intros n m. induction n as [| n' IHn'].
-  - simpl. induction m as [| m' IHm'].
-    + simpl. reflexivity.
-    + simpl. rewrite <- IHm'. reflexivity.
-  - simpl. rewrite -> IHn'. rewrite -> plus_n_Sm. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 
 Theorem add_assoc : forall n m p : nat,
   n + (m + p) = (n + m) + p.
 Proof.
-  intros n m p. induction n as [| n' IHn'].
-  - simpl. reflexivity.
-  - simpl. rewrite -> IHn'. simpl. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (double_plus)
@@ -241,9 +236,7 @@ Fixpoint double (n:nat) :=
 
 Lemma double_plus : forall n, double n = n + n .
 Proof.
-  simpl. induction n as [| n' IHn'].
-  - simpl. reflexivity.
-  - simpl. rewrite -> IHn'. rewrite -> plus_n_Sm. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (eqb_refl)
@@ -253,9 +246,7 @@ Proof.
 Theorem eqb_refl : forall n : nat,
   (n =? n) = true.
 Proof.
-  simpl. induction n as [| n' IHn'].
-  - simpl. reflexivity.
-  - simpl. rewrite -> IHn'. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (even_S)
@@ -270,11 +261,7 @@ Proof.
 Theorem even_S : forall n : nat,
   even (S n) = negb (even n).
 Proof.
-  simpl. induction n as [| n' IHn'].
-  - simpl. reflexivity.
-  - simpl. rewrite -> IHn'.  destruct even.
-    + simpl. reflexivity.
-    + simpl. reflexivity. Qed.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 1 star, standard, optional (destruct_induction)
@@ -512,10 +499,7 @@ Definition manual_grade_for_eqb_refl_informal : option (nat*string) := None.
 Theorem add_shuffle3 : forall n m p : nat,
   n + (m + p) = m + (n + p).
 Proof.
-  intros n m p.
-  induction n as [| n' IHn'].
-  - simpl. reflexivity.
-  - simpl. rewrite -> IHn'. Abort.
+  (* FILL IN HERE *) Admitted.
 
 (** Now prove commutativity of multiplication.  You will probably want
     to look for (or define and prove) a "helper" theorem to be used in
@@ -775,13 +759,11 @@ Fixpoint normalize (b:bin) : bin
 (** Finally, prove the main theorem. The inductive cases could be a
     bit tricky.
 
-    Hint 1: Start by trying to prove the main statement, see where you
+    Hint: Start by trying to prove the main statement, see where you
     get stuck, and see if you can find a lemma -- perhaps requiring
     its own inductive proof -- that will allow the main proof to make
-    progress. You might end up with a couple of these.
-
-    Hint 2: Lemma [double_incr_bin] that you proved above will be
-    helpful, too.*)
+    progress. We have one lemma for the [B0] case (which also makes 
+    use of [double_incr_bin]) and another for the [B1] case. *)
 
 Theorem bin_nat_bin : forall b, nat_to_bin (bin_to_nat b) = normalize b.
 Proof.
@@ -789,4 +771,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-08-08 17:13 *)
+(* 2023-03-25 11:11 *)
